@@ -1,0 +1,28 @@
+# Run 'make', then 'touch one.h' and 'make' again.
+
+# C compiler
+CC=cc
+
+# target that decides which targets to call (in this case, one)
+all: one
+
+# recipe that compiles the object files specified. This target has 3 prereqs
+# one checks if the other object files created in the other targets are valid
+one: one.o main.o two.o three.o
+	${CC} one.o main.o two.o three.o -o one
+
+# compiles one.c if its 3 prereqs are valid
+one.o: ext.h one.h one.c
+	${CC} -c one.c
+# compiles main.c if its 3 prereqs are valid
+main.o: ext.h one.h main.c
+	${CC} -c main.c
+# compiles two.c if the prereqs are valid
+two.o: one.h two.c 
+	${CC} -c two.c
+# compiles three.c if if the 2 prereqs are valid
+three.o: one.h three.c
+	${CC} -c three.c
+
+clean:
+	rm -f one *.oi

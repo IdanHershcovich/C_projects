@@ -1,0 +1,45 @@
+ih64@tux3:~/cs283/Lab1/gdb$ gdb g1
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from g1...done.
+(gdb) break main
+Breakpoint 1 at 0x742: file g1.c, line 7.
+(gdb) r
+Starting program: /home2/home-i/ih64/cs283/Lab1/gdb/g1
+
+Breakpoint 1, main () at g1.c:7
+7	  c = fgetc (stdin) ;
+(gdb) n
+erj
+8	  while (c != EOF)
+(gdb) n
+9	  if (isalnum (c) )
+(gdb) n
+10	   printf ("%c\n", c) ;
+(gdb) n
+e
+8	  while (c != EOF)
+(gdb) 3
+Undefined command: "3".  Try "help".
+(gdb) n
+9	  if (isalnum (c) )
+(gdb) n
+10	   printf ("%c\n", c) ;
+(gdb) quit
+A debugging session is active.
+
+	Inferior 1 [process 19776] will be killed.
+
+Quit anyway? (y or n) y

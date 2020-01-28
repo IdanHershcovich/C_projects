@@ -1,0 +1,43 @@
+ih64@tux3:~/cs283/Lab1/gdb$ gdb g2
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from g1...done.
+(gdb) break main
+Breakpoint 1 at 0x742: file g2.c, line 8.
+(gdb) r
+Starting program: /home2/home-i/ih64/cs283/Lab1/gdb/g2
+
+Breakpoint 1, main () at g2.c:8
+8	  num = 1 << 31;
+(gdb) display num
+1: num = 22967
+(gdb) display buf
+2: buf = 0x0
+(gdb) n
+9	  buf = malloc(num) ;
+1: num = -2147483648
+2: buf = 0x0
+(gdb) n
+10	  fgets (buf, 1024, stdin) ;
+1: num = -2147483648
+2: buf = 0x0
+(gdb) n
+
+Program received signal SIGSEGV, Segmentation fault.
+	0x00007ffff7a7cd27 in __GI__IO_getline_info (
+	    fp=fp@entry=0x7ffff7dd18e0 <_IO_2_1_stdin_>, buf=buf@entry=0x0, n=1023, 
+	    delim=delim@entry=10, extract_delim=extract_delim@entry=1, eof=eof@entry=0x0)
+	    at iogetline.c:70
+	70	iogetline.c: No such file or directory.

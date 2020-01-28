@@ -1,0 +1,67 @@
+ih64@tux5:~/cs283/Lab1/gdb$ ih64@tux5:~/cs283/Lab1/gdb$ gdb etox
+-bash: ih64@tux5:~/cs283/Lab1/gdb$: No such file or directory
+ih64@tux5:~/cs283/Lab1/gdb$ GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+-bash: syntax error near unexpected token `('
+ih64@tux5:~/cs283/Lab1/gdb$ Copyright (C) 2018 Free Software Foundation, Inc.
+-bash: syntax error near unexpected token `C'
+ih64@tux5:~/cs283/Lab1/gdb$ License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+ih64@tux5:~/cs283/Lab1/gdb$ This is free software: you are free to change and redistribute it.
+Reading symbols from etox...done.
+(gdb) b 17
+Breakpoint 1 at 0x7c6: file etox.c, line 17.
+(gdb) b 40
+Breakpoint 2 at 0x8c3: file etox.c, line 40.
+(gdb) r
+Starting program: /home2/home-i/ih64/cs283/Lab1/gdb/etox
+This program calculates e^x
+using sum of (x^k)/k!
+
+
+(gdb) p x
+$1 = 4
+(gdb) n
+x,n =   4.0000    2
+19	  series = getvalue(x,n);
+(gdb) n
+
+Breakpoint 2, factorial (number=0) at etox.c:44
+44	  int fact = 0;
+(gdb) p x
+No symbol "x" in current context.
+(gdb) n
+46	  for (j = 1; j <= number; j++)
+(gdb) n
+51	  return(fact);
+(gdb) n
+52	 }
+(gdb) n
+getvalue (x=4, n=2) at etox.c:35
+35	    xpow = xpow * x;
+(gdb) n
+32	  for (k = 0; k <= n; k++)
+(gdb) n
+34	    value += xpow / factorial(k);
+(gdb) n
+
+Breakpoint 2, factorial (number=1) at etox.c:44
+44	  int fact = 0;
+(gdb) n
+46	  for (j = 1; j <= number; j++)
+(gdb) x = 4
+A syntax error in expression, near `= 4'.
+(gdb) n
+48	    fact = fact * j;
+(gdb) n
+46	  for (j = 1; j <= number; j++)
+(gdb) n
+51	  return(fact);
+(gdb) n
+
+(gdb) p fact
+$5 = 0
+(gdb) quit
+A debugging session is active.
+
+	Inferior 1 [process 22385] will be killed.
+
+Quit anyway? (y or n) y

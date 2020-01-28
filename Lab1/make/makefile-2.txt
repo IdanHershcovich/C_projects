@@ -1,0 +1,22 @@
+# first 3 lines assign values to these variables
+PROG=	test
+OBJS=	one.o main.o two.o three.o
+CFLAGS=	-Wall -g
+
+#executes target PROG
+all: ${PROG}
+
+# Target calls the test variable and has the OBJS variable as a prereq
+${PROG}: ${OBJS}
+# @echo makes it so it doesnt get printed 
+# $@ is the automatic variable. since OBJS var contains more than one object file, the recipe once for each file
+# the last lines compiles with cc and with the ld linker the 3 object files 
+	@echo $@ depends on $?
+	${CC} ${LDFLAGS} ${OBJS} -o ${PROG}
+
+#compile with an extra flag sent to the c compiler. $@ is the filename and $< is the source file
+.c.o:
+	$(CC) -c $(CFLAGS) -o $@ $<
+	
+clean:
+	rm -f ${PROG} ${OBJS}

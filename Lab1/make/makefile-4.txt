@@ -1,0 +1,19 @@
+#this file looks the same as makefile3
+
+#Variables
+PROG=	test
+OBJS=	one.o main.o two.o three.o
+
+#compiler flags
+CFLAGS=	-Wall -g
+
+#target to run
+all: ${PROG}
+
+#same as makefile3
+${PROG}: ${OBJS}
+	@echo $@ depends on $?
+	${CC} ${LDFLAGS} ${OBJS} -o ${PROG}
+
+clean:
+	rm -f ls *.o

@@ -1,0 +1,18 @@
+# setting variables
+PROG=	test
+OBJS=	one.o main.o two.o three.o
+
+#Flags for the C compiler. -Wall is a flag sent to the compiler so it can warn you about constructs in your code and help debug
+#CFLAGS=	-Wall -g
+
+# target to be executed
+all: ${PROG}
+
+# recipe that targets 3 test and has 3 pre-reqs. The recipe will run once for each file in the pre-req.
+#Last line of the recipe compiles the data from the objs variable with the ld linker
+${PROG}: ${OBJS}
+	@echo $@ depends on $?
+	${CC} ${LDFLAGS} ${OBJS} -o ${PROG}
+
+clean:
+	rm -f ls *.o

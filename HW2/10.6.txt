@@ -1,0 +1,5 @@
+fd2 = 4
+
+when initializing fd1, and fd2, we are opening the descriptors 1 and 2. Since fd0 is open on entry, when calling open(), we open
+descriptor 3. The second time we call open on fd2, we are opening the descriptor 4. When we call close fd2, we are closing descriptor 4.
+The last call to open, opens the descriptor 4, so when we print fd2, we get 4.
