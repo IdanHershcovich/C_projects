@@ -1,0 +1,3 @@
+Since signal handlers can’t queue the signals they receive because they only have 1 bit for pending signals. 
+When the first signal is being processed, the bit available is set for the second signal.
+ By the time the third signal comes in, it gets ignored. 
