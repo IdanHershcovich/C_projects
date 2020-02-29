@@ -22,6 +22,11 @@ Testing included correct termination of the requested file, sending the correct 
 
 For server, testing was done after establishing a successful connection. In order to test, I had to do differnet ways of parsing the data and writing back with Rio to the client.
 
+Testing on Tux:
+I tested both the client and the server using tux. For the server, I ran it as: ./server 5789
+and for client I ran it as: ./client tux3.cs.drexel.edu 5789 /index.html
+
+It worked fine, but both the client and the server need to be running on the same tux cluster.
 
 CLIENT TEST OUTPUT:
 
