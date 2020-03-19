@@ -38,7 +38,7 @@ typedef struct sockaddr SA;
 
 /* Persistent state for the robust I/O (Rio) package */
 /* $begin rio_t */
-#define RIO_BUFSIZE 8192
+#define RIO_BUFSIZE 32
 typedef struct {
     int rio_fd;                /* descriptor for this internal buf */
     int rio_cnt;               /* unread bytes in internal buf */

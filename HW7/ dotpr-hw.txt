@@ -1,0 +1,75 @@
+// #include "csapp.h"
+// #include "csapp.c"
+#include <stdio.h>
+#include <pthread.h>
+#include <stdlib.h>
+#define NUMTHRDS 4
+#define VECLEN 100000
+
+//Initializing vars and mutex
+pthread_t callThd[NUMTHRDS];
+double *array_a;
+double *array_b;
+double big_sum;
+int veclen;
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_attr_t attr;
+void *dotprod(void *arg)
+{
+    int start;
+    int end;
+
+    double *x = array_a;
+    double *y = array_b;
+
+    /* ... */
+    double mysum = 0;
+    //conversion into int
+    int thr = (int)arg;
+
+    start = veclen + thr;
+    end = start + thr;
+    for (int i = start; i < end; i++)
+    {
+        mysum += (x[i] * y[i]);
+    }
+
+    //stop other threads from accessing the sum
+    pthread_mutex_lock(&mutex);
+    big_sum += mysum;
+    pthread_mutex_unlock(&mutex);
+}
+int main(int argc, char *argv[])
+{
+    long i;
+    double *a, *b;
+    void *status;
+    a = (double *)malloc(NUMTHRDS * VECLEN * sizeof(double));
+    b = (double *)malloc(NUMTHRDS * VECLEN * sizeof(double));
+    for (i = 0; i < VECLEN * NUMTHRDS; i++)
+    {
+        a[i] = 1;
+        b[i] = a[i];
+    }
+    veclen = VECLEN;
+    array_a = a;
+    array_b = b;
+    big_sum = 0;
+    //initialize mutex and attribute
+    pthread_mutex_init(&mutex, NULL); 
+    pthread_attr_init(&attr);
+    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
+    for (i = 0; i < NUMTHRDS; i++)
+    {
+        /* Each thread works on a different set of data.
+          The offset is specified by 'i'. The size of
+          the data for each thread is indicated by VECLEN.
+       */
+        pthread_create(&callThd[i], &attr, dotprod, (void *)i);
+        /* Wait on the other threads */
+        pthread_join(callThd[i], status);
+    }
+    printf("Sum = %f \n", big_sum);
+    free(a);
+    free(b);
+}
